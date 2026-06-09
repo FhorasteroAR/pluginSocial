@@ -1,0 +1,123 @@
+/**
+ * Social Feed — minimal, responsive grid styles.
+ *
+ * Scoped under .social-feed so it won't leak into the rest of the theme.
+ * Column count is driven by the --social-feed-columns custom property set
+ * inline by the template.
+ */
+
+.social-feed {
+	margin: 1.5rem 0;
+}
+
+.social-feed__title {
+	margin: 0 0 1rem;
+	font-size: 1.5rem;
+	line-height: 1.2;
+}
+
+.social-feed__error,
+.social-feed__empty {
+	padding: 0.75rem 1rem;
+	border-radius: 6px;
+	background: #f3f4f6;
+	color: #6b7280;
+	font-size: 0.9rem;
+}
+
+.social-feed__error {
+	background: #fef2f2;
+	color: #b91c1c;
+}
+
+/* Grid */
+.social-feed__grid {
+	display: grid;
+	grid-template-columns: repeat(var(--social-feed-columns, 3), minmax(0, 1fr));
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.social-feed__item {
+	margin: 0;
+}
+
+.social-feed__link {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	border-radius: 10px;
+	background: #fff;
+	color: inherit;
+	text-decoration: none;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.social-feed__link:hover,
+.social-feed__link:focus-visible {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Media — keep a square aspect ratio */
+.social-feed__media {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+	background: #f3f4f6;
+}
+
+.social-feed__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* Body */
+.social-feed__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 0.875rem 1rem;
+}
+
+.social-feed__text {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.45;
+}
+
+.social-feed__meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: auto;
+	font-size: 0.8rem;
+	color: #6b7280;
+}
+
+.social-feed__cta {
+	font-weight: 600;
+	color: #2563eb;
+}
+
+/* Responsive fallbacks for browsers without aspect-ratio is unnecessary in
+   modern WP; collapse columns on small screens. */
+@media (max-width: 782px) {
+	.social-feed__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 480px) {
+	.social-feed__grid {
+		grid-template-columns: 1fr;
+	}
+}
