@@ -38,6 +38,8 @@ require_once SOCIAL_FEED_PATH . 'includes/handlers/class-social-feed-linkedin-ha
 require_once SOCIAL_FEED_PATH . 'includes/class-social-feed-renderer.php';
 require_once SOCIAL_FEED_PATH . 'includes/class-social-feed-shortcode.php';
 require_once SOCIAL_FEED_PATH . 'includes/class-social-feed-block.php';
+require_once SOCIAL_FEED_PATH . 'includes/class-social-feed-settings.php';
+require_once SOCIAL_FEED_PATH . 'includes/class-social-feed-cron.php';
 require_once SOCIAL_FEED_PATH . 'includes/class-social-feed-plugin.php';
 
 /*

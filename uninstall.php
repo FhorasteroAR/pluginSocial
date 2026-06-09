@@ -11,6 +11,10 @@
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
 delete_option( 'social_feed_version' );
+delete_option( 'social_feed_settings' );
+
+// Remove the scheduled background-refresh event.
+wp_clear_scheduled_hook( 'social_feed_refresh_event' );
 
 global $wpdb;
 

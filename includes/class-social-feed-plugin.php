@@ -64,6 +64,14 @@ final class Social_Feed_Plugin {
 		( new Social_Feed_Shortcode() )->register();
 		( new Social_Feed_Block() )->register();
 
+		// Background refresh — registered on every request so the cron hook fires.
+		( new Social_Feed_Cron() )->register();
+
+		// Admin settings page — only needed in wp-admin.
+		if ( is_admin() ) {
+			( new Social_Feed_Settings() )->register();
+		}
+
 		// Authenticated AJAX endpoint to force-refresh the cache from the editor.
 		add_action( 'wp_ajax_social_feed_refresh', array( $this, 'ajax_refresh_cache' ) );
 
@@ -125,6 +133,9 @@ final class Social_Feed_Plugin {
 	 */
 	public static function activate() {
 		add_option( 'social_feed_version', SOCIAL_FEED_VERSION );
+		// Seed defaults and schedule the background refresh.
+		add_option( Social_Feed_Settings::OPTION, Social_Feed_Settings::defaults() );
+		Social_Feed_Cron::activate();
 	}
 
 	/**
@@ -134,5 +145,6 @@ final class Social_Feed_Plugin {
 	 */
 	public static function deactivate() {
 		Social_Feed_API_Handler::flush_all_caches();
+		Social_Feed_Cron::deactivate();
 	}
 }

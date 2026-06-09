@@ -34,12 +34,14 @@ class Social_Feed_Shortcode {
 	 * @return string
 	 */
 	public function render( $atts ) {
+		// Defaults come from the settings page, so an attribute-less shortcode
+		// reflects the site-wide configuration.
 		$atts = shortcode_atts(
 			array(
-				'network' => 'instagram',
-				'count'   => 9,
-				'columns' => 3,
-				'title'   => '',
+				'network' => Social_Feed_Settings::get( 'network', 'instagram' ),
+				'count'   => Social_Feed_Settings::get( 'count', 9 ),
+				'columns' => Social_Feed_Settings::get( 'columns', 3 ),
+				'title'   => Social_Feed_Settings::get( 'title', '' ),
 			),
 			$atts,
 			self::TAG
