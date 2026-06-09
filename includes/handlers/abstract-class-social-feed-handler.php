@@ -33,7 +33,7 @@ abstract class Social_Feed_Abstract_Handler {
 	 * Read a stored credential / option for this network.
 	 *
 	 * Tokens are looked up first as a constant (recommended: define them in
-	 * wp-config.php so they never hit the database), then as an option.
+	 * wp-config.php so they never hit the database), then in the settings store.
 	 *
 	 * @param string $name    Logical credential name, e.g. "access_token".
 	 * @param mixed  $default Fallback value.
@@ -47,9 +47,8 @@ abstract class Social_Feed_Abstract_Handler {
 			return constant( $constant );
 		}
 
-		$option = get_option( 'social_feed_' . $this->get_network() . '_' . $name, $default );
-
-		return '' !== $option ? $option : $default;
+		// Settings are keyed as "{network}_{name}", e.g. "instagram_access_token".
+		return Social_Feed_Settings::get( $this->get_network() . '_' . $name, $default );
 	}
 
 	/**
