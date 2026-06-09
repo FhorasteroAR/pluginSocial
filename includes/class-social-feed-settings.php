@@ -92,17 +92,19 @@ class Social_Feed_Settings {
 	}
 
 	/**
-	 * Add the options page under Settings.
+	 * Add a top-level menu item in the admin sidebar.
 	 *
 	 * @return void
 	 */
 	public function add_menu() {
-		add_options_page(
+		add_menu_page(
 			__( 'Social Feed', 'social-feed' ),
 			__( 'Social Feed', 'social-feed' ),
 			'manage_options',
 			self::SLUG,
-			array( $this, 'render_page' )
+			array( $this, 'render_page' ),
+			'dashicons-share',
+			81
 		);
 	}
 
